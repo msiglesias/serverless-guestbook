@@ -13,6 +13,9 @@ const guestbook = {
   },
   // add a single guestbood entry
   add(name, email, comment) {
+    console.log($('#option1').val());
+    console.log($('#option2').val());
+    console.log($('#option3').val());
     console.log('Sending', name, email, comment)
     return $.ajax({
       type: 'PUT',
