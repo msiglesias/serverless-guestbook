@@ -44,21 +44,21 @@
               </div>
             </div>
             <div class="field">
-              <label class="label">Comment</label>
-              <div class="control">
+              <label class="label">Opciones</label>
+              <!-- <div class="control">
                 <textarea class="textarea" placeholder="your comment" id="comment"></textarea>
-              </div>
+              </div> -->
               <div class="field">
-              <div class="control">
-                <input type="radio" name="option" value="Opcion 1">Opcion 1<br>
+                <div class="control">
+                  <input type="radio" name="option" value="Opcion 1" id="option1">Opcion 1<br>
+                </div>
+                <div class="control">
+                  <input type="radio" name="option" value="Opcion 2" id="option2">Opcion 2<br>
+                </div>
+                <div class="control">
+                  <input type="radio" name="option" value="Opcion 3" id="option3">Opcion 3<br>
+                </div>
               </div>
-              <div class="control">
-                <input type="radio" name="option" value="Opcion 2">Opcion 2<br>
-              </div>
-              <div class="control">
-                <input type="radio" name="option" value="Opcion 3">Opcion 3<br>
-              </div>
-</div>
             </div>
             <div class="control">
               <button class="button is-primary">Send your message</button>
@@ -83,6 +83,7 @@
             <p>
               <strong>{{name}}</strong> <small>{{email}}</small>
               <br> {{comment}}
+              <br> La opción elegida es {{option}}
             </p>
           </div>
         </div>
