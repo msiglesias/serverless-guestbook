@@ -48,29 +48,60 @@ const guestbook = {
 
 (function() {
 
-  let entriesTemplate;
-
-  function prepareTemplates() {
-    entriesTemplate = Handlebars.compile($('#entries-template').html());
-  }
-
   // retrieve entries and update the UI
   function loadEntries() {
-    console.log('Loading entries...');
-    $('#entries').html('Loading entries...');
     guestbook.get().done(function(result) {
       if (!result.entries) {
         return;
       }
-
-      const context = {
-        entries: result.entries
-      }
-      $('#entries').html(entriesTemplate(context));
+      countVotes(result.entries);
+	    
     }).error(function(error) {
       $('#entries').html('No entries');
       console.log(error);
     });
+  }
+	
+  function refreshPage(){
+window.location.href=window.location.href
+}
+ 
+  function countVotes(votes) {
+    var totalVotes = votes.length;
+    var votesWindows = 0;
+    var votesIOS = 0;
+    var votesAndroid = 0;
+ 
+    for (i = 0; i < totalVotes; i++) {
+      if (votes[i].comment == "Windows"){
+        votesWindows++;
+      } else if (votes[i].comment == "iOS"){
+        votesIOS++;
+      } else{
+        votesAndroid++;
+      }
+    }
+ 
+new Chart(document.getElementById("pie-chart"), {
+    type: 'pie',
+    data: {
+      labels: ["Windows", "iOS", "Android"],
+      datasets: [{
+        label: "Votos",
+        backgroundColor: ["blue", "white","green"],
+        data: [votesWindows, votesIOS, votesAndroid]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Resultados'
+      }
+    }
+});
+ 
+ 
+//return resultContador;
   }
 
   // intercept the click on the submit button, add the guestbook entry and
