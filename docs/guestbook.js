@@ -126,7 +126,7 @@ const guestbook = {
           }
      }   
      if (checkDoc) {
-     	guestbook.modificarPreferencias(
+     	guestbook.updateVote(
      	  $('#name').val().trim(),
      	  $('#email').val().trim(),
      	  $('input[name=comment]:checked').val(),
