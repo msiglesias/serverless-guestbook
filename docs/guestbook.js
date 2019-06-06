@@ -63,8 +63,8 @@ const guestbook = {
   }
 	
   function refreshPage(){
-window.location.href=window.location.href
-}
+    window.location.href=window.location.href
+  }
  
   function countVotes(votes) {
     var totalVotes = votes.length;
@@ -82,47 +82,74 @@ window.location.href=window.location.href
       }
     }
  
-new Chart(document.getElementById("pie-chart"), {
-    type: 'pie',
-    data: {
-      labels: ["Windows", "iOS", "Android"],
-      datasets: [{
-        label: "Votos",
-        backgroundColor: ["blue", "white","green"],
-        data: [votesWindows, votesIOS, votesAndroid]
-      }]
-    },
-    options: {
-      title: {
-        display: true,
-        text: 'Resultados'
-      }
-    }
-});
- 
- 
-//return resultContador;
+	new Chart(document.getElementById("pie-chart"), {
+	    type: 'pie',
+	    data: {
+	      labels: ["Windows", "iOS", "Android"],
+	      datasets: [{
+		label: "Votos",
+		backgroundColor: ["blue", "white","green"],
+		data: [votesWindows, votesIOS, votesAndroid]
+	      }]
+	    },
+	    options: {
+	      title: {
+		display: true,
+		text: 'Resultados'
+	      }
+	    }
+	});
   }
 
   // intercept the click on the submit button, add the guestbook entry and
   // reload entries on success
   $(document).on('submit', '#addEntry', function(e) {
     e.preventDefault();
+    var _id = "";
+    var _rev = "";   
+    var checkDoc = false;
 
-    guestbook.add(
-      $('#name').val().trim(),
-      $('#email').val().trim(),
-      $('input[name=option]:checked').val()
-    ).done(function(result) {
-      // reload entries
-      loadEntries();
-    }).error(function(error) {
-      console.log(error);
+    guestbook.get().done(function(result) {
+    if (!result.entries) {
+        return;
+    } 
+    //TO DO: Se debería de crear una consulta a la bbdd buscando el mail
+    if (result.entries.length > 0) {
+          for (i = 0; i < result.entries.length; i++) {
+	   //Comparar campo clave mail 
+            if ($('#email').val().trim() == result.entries[i].email) {
+              _id = result.entries[i]._id;
+              _rev = result.entries[i]._rev;
+              checkDoc = true;
+              break;
+            }
+          }
+     }   
+     if (checkDoc) {
+     	guestbook.modificarPreferencias(
+     	  $('#name').val().trim(),
+     	  $('#email').val().trim(),
+     	  $('input[name=comment]:checked').val(),
+       	  _id,
+       	  _rev
+    	).done(function(result) {
+      	  loadEntries();
+    	}).error(function(error) {
+      	  console.log(error);
+    	});
+      } else {
+	guestbook.add(
+	  $('#name').val().trim(),
+	  $('#email').val().trim(),
+	  $('input[name=comment]:checked').val()
+	).done(function(result) {
+	  loadEntries();    
+        });
+      }
     });
   });
 
   $(document).ready(function() {
-    prepareTemplates();
     loadEntries();
   });
 })();
