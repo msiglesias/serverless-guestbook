@@ -82,8 +82,8 @@ const guestbook = {
       }
     }
  
-	new Chart(document.getElementById("bar-chart"), {
-	    type: 'bar',
+	new Chart(document.getElementById("polarArea-chart"), {
+	    type: 'polarArea',
 	    data: {
 	      labels: ["Windows", "iOS", "Android"],
 	      datasets: [{
