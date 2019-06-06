@@ -11,9 +11,27 @@ const guestbook = {
       dataType: 'json'
     });
   },
+  
+  updateVote(name, email, comment,_id,_rev) {
+    console.log('Sending',name, email, comment,_id,_rev)
+    return $.ajax({
+      type: 'PUT',
+      url: `${apiUrl}/updateVote`,
+      contentType: 'application/json; charset=utf-8',
+      data: JSON.stringify({
+        name,
+        email,
+        comment,
+	_id,
+	_rev
+      }),
+      dataType: 'json',
+    });
+  },
+  
   // add a single guestbood entry
-  add(name, email, option) {
-    console.log('Sending', name, email, option)
+  add(name, email, comment) {
+    console.log('Sending', name, email, comment)
     return $.ajax({
       type: 'PUT',
       url: `${apiUrl}/entries`,
@@ -21,7 +39,7 @@ const guestbook = {
       data: JSON.stringify({
         name,
         email,
-        option
+        comment
       }),
       dataType: 'json',
     });
