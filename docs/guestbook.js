@@ -88,7 +88,7 @@ const guestbook = {
 	      labels: ["Windows", "iOS", "Android"],
 	      datasets: [{
 		label: "Votos",
-		backgroundColor: ["blue", "white","green"],
+		backgroundColor: ["blue", "gray","green"],
 		data: [votesWindows, votesIOS, votesAndroid]
 	      }]
 	    },
