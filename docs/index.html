@@ -60,29 +60,6 @@
     </div>
   </section>
 
-  <script id="entries-template" type="text/x-handlebars-template">
-    {{#each entries}}
-    <div class="box">
-      <article class="media">
-        <div class="media-left">
-          <figure class="image is-64x64">
-            <img src="{{icon}}" alt="No Image">
-          </figure>
-        </div>
-        <div class="media-content">
-          <div class="content">
-            <p>
-              <strong>{{name}}</strong> <small>{{email}}</small>
-              <br> {{comment}}
-              <br> La opción elegida es {{option}}
-            </p>
-          </div>
-        </div>
-      </article>
-    </div>
-    {{/each}}
-  </script>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="guestbook.js"></script>
