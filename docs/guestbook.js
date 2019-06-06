@@ -82,7 +82,7 @@ const guestbook = {
       }
     }
  
-	new Chart(document.getElementById("pie-chart"), {
+	new Chart(document.getElementById("bar-chart"), {
 	    type: 'bar',
 	    data: {
 	      labels: ["Windows", "iOS", "Android"],
